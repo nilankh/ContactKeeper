@@ -1,5 +1,3 @@
-
-
 {
-    "mongoURI":"mongodb+srv://nilank123:nilank123@contactkeeper.vn0uf.mongodb.net/<dbname>?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://nilank123:nilank123@contactkeeper.vn0uf.mongodb.net/<dbname>?retryWrites=true&w=majority"
 }

@@ -6,6 +6,9 @@ const app = express();
 // Connect Db
 connectDB();
 
+//Init Middleware(to use req.body we need to need to use middleware, pehle third party body parser install krte the but ap express ke saath aata hi h)
+app.use(express.json({extended: false})) 
+
 app.get("/", (req, res) =>
   res.send({ msg: "Welcome to the ContactKeeper API....." })
 );
