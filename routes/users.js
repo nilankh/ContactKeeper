@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const { check, validationResult } = require("express-validator");
+
 const User = require("../models/User");
 
 // @route POST api/users
@@ -50,11 +51,13 @@ router.post(
       // saving on db
       await user.save();
 
+      // the object we want to send in token
       const payload = {
         user: {
           id: user.id,
         },
       };
+      // to generate a token we need to sign it
       jwt.sign(
         payload,
         config.get("jwtSecret"),
