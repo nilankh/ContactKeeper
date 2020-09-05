@@ -11,9 +11,10 @@ const User = require("../models/User");
 // @route GET api/auth
 // @desc Get Logged in user
 // @access Private
+// Any time we need to protect route we simply need to bring a middleware(that is auth )and passed it as as second argument
 router.get("/", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.user.id).select("-password"); //q -password because main ni chahta ki password v show kre
     res.json(user);
   } catch (err) {
     console.error(err.message);
