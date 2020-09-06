@@ -1,0 +1,1 @@
+concurrently packagae basically allows us to run both the backend server which is running at 5000 and the front end react server so concurrently allows both of those with one command 
