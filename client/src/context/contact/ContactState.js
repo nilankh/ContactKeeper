@@ -1,8 +1,9 @@
-import React, { useReducer } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useReducer } from 'react';
+import axios from 'axios';
+
 // uuid willl basically genrate some random id
-import ContactContext from "./contactContext";
-import contactReducer from "./contactReducer";
+import ContactContext from './contactContext';
+import contactReducer from './contactReducer';
 import {
   ADD_CONTACT,
   DELETE_CONTACT,
@@ -11,42 +12,32 @@ import {
   UPDATE_CONTACT,
   FILTER_CONTACTS,
   CLEAR_FILTER,
-} from "../types";
+  CONTACT_ERROR,
+} from '../types';
 
 const ContactState = (props) => {
   const initialState = {
-    contacts: [
-      {
-        id: 1,
-        name: "Jill punj",
-        email: "jill@gmail.com",
-        phone: "111-111-1111",
-        type: "personal",
-      },
-      {
-        id: 2,
-        name: "Sara Watson",
-        email: "sara@gmail.com",
-        phone: "222-222-2222",
-        type: "personal",
-      },
-      {
-        id: 3,
-        name: "Harry puttar",
-        email: "harryputtar@gmail.com",
-        type: "professional",
-      },
-    ],
+    contacts: [],
     current: null,
     filtered: null,
+    error: null,
   };
 
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
   // Add Contact
-  const addContact = (contact) => {
-    contact.id = uuidv4();
-    dispatch({ type: ADD_CONTACT, payload: contact });
+  const addContact = async (contact) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.post('/api/contacts', contact, config);
+      dispatch({ type: ADD_CONTACT, payload: res.data });
+    } catch (error) {
+      dispatch({ type: CONTACT_ERROR, payload: error.respons.msg });
+    }
   };
 
   // Delete Contact
@@ -84,6 +75,7 @@ const ContactState = (props) => {
       value={{
         contacts: state.contacts,
         current: state.current,
+        error: state.error,
         filtered: state.filtered,
         addContact,
         deleteContact,
