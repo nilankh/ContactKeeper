@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const ContactSchema = mongoose.Schema({
-    // We want to create relationship between contact and user because each user has there own set of contacts
+  // We want to create relationship between contact and user because each user has there own set of contacts
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "users",
+    ref: 'users',
   },
 
   name: {
@@ -20,7 +20,7 @@ const ContactSchema = mongoose.Schema({
   },
   type: {
     type: String,
-    default: "personal",
+    default: 'personal',
   },
   date: {
     type: Date,
@@ -28,4 +28,4 @@ const ContactSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("contact", ContactSchema);
+module.exports = mongoose.model('contact', ContactSchema);
