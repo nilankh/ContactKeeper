@@ -1,4 +1,4 @@
-import Axios from 'axios';
+
 import aixos from 'axios';
 
 const setAuthToken = (token) => {
